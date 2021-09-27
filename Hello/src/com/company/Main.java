@@ -16,7 +16,7 @@ public class Main {
         String message = "Hello String";
         System.out.print(Arrays.toString(numbers));
         Date now = new Date();
-        now.getTime();
+        //now.getTime();
         System.out.println(now);
 
         int temp = 32;
