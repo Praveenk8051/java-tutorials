@@ -7,7 +7,7 @@ public class Student {
     private String name = "";
     private int[] listOfMarks = {};
 
-    public Student(String name, int[] listOfMarks) {
+    public Student(String name, int... listOfMarks) {
     this.name = name;
     this.listOfMarks = listOfMarks;
     }
