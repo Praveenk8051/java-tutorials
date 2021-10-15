@@ -1,0 +1,35 @@
+{
+    "Plugins": [
+        {
+            "Info": {
+                "Types": {
+                    "UsdMdlFileFormat": {
+                        "bases": [
+                            "SdfFileFormat"
+                        ],
+                        "displayName": "USD MDL File Format",
+                        "extensions": [
+                            "mdl"
+                        ],
+                        "formatId": "mdl",
+                        "primary": true,
+                        "target": "usd"
+                    },
+                    "UsdMdlDiscoveryPlugin" : {
+                        "bases": ["NdrDiscoveryPlugin"],
+                        "displayName": "MDL Discovery"
+                    },
+                    "UsdMdlParserPlugin" : {
+                        "bases": ["NdrParserPlugin"],
+                        "displayName": "MDL Node Parser"
+                    }
+                }
+            },
+            "LibraryPath": "../usdMdl.so",
+            "Name": "usdMdl",
+            "ResourcePath": "resources",
+            "Root": "..",
+            "Type": "library"
+        }
+    ]
+}

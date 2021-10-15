@@ -1,0 +1,1041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="generator" content="AsciiDoc 8.6.9">
+<title>packman-config-file(5)</title>
+<style type="text/css">
+/* Shared CSS for AsciiDoc xhtml11 and html5 backends */
+
+/* Default font. */
+body {
+  font-family: Georgia,serif;
+}
+
+/* Title font. */
+h1, h2, h3, h4, h5, h6,
+div.title, caption.title,
+thead, p.table.header,
+#toctitle,
+#author, #revnumber, #revdate, #revremark,
+#footer {
+  font-family: Arial,Helvetica,sans-serif;
+}
+
+body {
+  margin: 1em 5% 1em 5%;
+}
+
+a {
+  color: blue;
+  text-decoration: underline;
+}
+a:visited {
+  color: fuchsia;
+}
+
+em {
+  font-style: italic;
+  color: navy;
+}
+
+strong {
+  font-weight: bold;
+  color: #083194;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #527bbd;
+  margin-top: 1.2em;
+  margin-bottom: 0.5em;
+  line-height: 1.3;
+}
+
+h1, h2, h3 {
+  border-bottom: 2px solid silver;
+}
+h2 {
+  padding-top: 0.5em;
+}
+h3 {
+  float: left;
+}
+h3 + * {
+  clear: left;
+}
+h5 {
+  font-size: 1.0em;
+}
+
+div.sectionbody {
+  margin-left: 0;
+}
+
+hr {
+  border: 1px solid silver;
+}
+
+p {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
+ul, ol, li > p {
+  margin-top: 0;
+}
+ul > li     { color: #aaa; }
+ul > li > * { color: black; }
+
+.monospaced, code, pre {
+  font-family: "Courier New", Courier, monospace;
+  font-size: inherit;
+  color: navy;
+  padding: 0;
+  margin: 0;
+}
+pre {
+  white-space: pre-wrap;
+}
+
+#author {
+  color: #527bbd;
+  font-weight: bold;
+  font-size: 1.1em;
+}
+#email {
+}
+#revnumber, #revdate, #revremark {
+}
+
+#footer {
+  font-size: small;
+  border-top: 2px solid silver;
+  padding-top: 0.5em;
+  margin-top: 4.0em;
+}
+#footer-text {
+  float: left;
+  padding-bottom: 0.5em;
+}
+#footer-badges {
+  float: right;
+  padding-bottom: 0.5em;
+}
+
+#preamble {
+  margin-top: 1.5em;
+  margin-bottom: 1.5em;
+}
+div.imageblock, div.exampleblock, div.verseblock,
+div.quoteblock, div.literalblock, div.listingblock, div.sidebarblock,
+div.admonitionblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.admonitionblock {
+  margin-top: 2.0em;
+  margin-bottom: 2.0em;
+  margin-right: 10%;
+  color: #606060;
+}
+
+div.content { /* Block element content. */
+  padding: 0;
+}
+
+/* Block element titles. */
+div.title, caption.title {
+  color: #527bbd;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 1.0em;
+  margin-bottom: 0.5em;
+}
+div.title + * {
+  margin-top: 0;
+}
+
+td div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content div.title:first-child {
+  margin-top: 0.0em;
+}
+div.content + div.title {
+  margin-top: 0.0em;
+}
+
+div.sidebarblock > div.content {
+  background: #ffffee;
+  border: 1px solid #dddddd;
+  border-left: 4px solid #f0f0f0;
+  padding: 0.5em;
+}
+
+div.listingblock > div.content {
+  border: 1px solid #dddddd;
+  border-left: 5px solid #f0f0f0;
+  background: #f8f8f8;
+  padding: 0.5em;
+}
+
+div.quoteblock, div.verseblock {
+  padding-left: 1.0em;
+  margin-left: 1.0em;
+  margin-right: 10%;
+  border-left: 5px solid #f0f0f0;
+  color: #888;
+}
+
+div.quoteblock > div.attribution {
+  padding-top: 0.5em;
+  text-align: right;
+}
+
+div.verseblock > pre.content {
+  font-family: inherit;
+  font-size: inherit;
+}
+div.verseblock > div.attribution {
+  padding-top: 0.75em;
+  text-align: left;
+}
+/* DEPRECATED: Pre version 8.2.7 verse style literal block. */
+div.verseblock + div.attribution {
+  text-align: left;
+}
+
+div.admonitionblock .icon {
+  vertical-align: top;
+  font-size: 1.1em;
+  font-weight: bold;
+  text-decoration: underline;
+  color: #527bbd;
+  padding-right: 0.5em;
+}
+div.admonitionblock td.content {
+  padding-left: 0.5em;
+  border-left: 3px solid #dddddd;
+}
+
+div.exampleblock > div.content {
+  border-left: 3px solid #dddddd;
+  padding-left: 0.5em;
+}
+
+div.imageblock div.content { padding-left: 0; }
+span.image img { border-style: none; vertical-align: text-bottom; }
+a.image:visited { color: white; }
+
+dl {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+dt {
+  margin-top: 0.5em;
+  margin-bottom: 0;
+  font-style: normal;
+  color: navy;
+}
+dd > *:first-child {
+  margin-top: 0.1em;
+}
+
+ul, ol {
+    list-style-position: outside;
+}
+ol.arabic {
+  list-style-type: decimal;
+}
+ol.loweralpha {
+  list-style-type: lower-alpha;
+}
+ol.upperalpha {
+  list-style-type: upper-alpha;
+}
+ol.lowerroman {
+  list-style-type: lower-roman;
+}
+ol.upperroman {
+  list-style-type: upper-roman;
+}
+
+div.compact ul, div.compact ol,
+div.compact p, div.compact p,
+div.compact div, div.compact div {
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+tfoot {
+  font-weight: bold;
+}
+td > div.verse {
+  white-space: pre;
+}
+
+div.hdlist {
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
+}
+div.hdlist tr {
+  padding-bottom: 15px;
+}
+dt.hdlist1.strong, td.hdlist1.strong {
+  font-weight: bold;
+}
+td.hdlist1 {
+  vertical-align: top;
+  font-style: normal;
+  padding-right: 0.8em;
+  color: navy;
+}
+td.hdlist2 {
+  vertical-align: top;
+}
+div.hdlist.compact tr {
+  margin: 0;
+  padding-bottom: 0;
+}
+
+.comment {
+  background: yellow;
+}
+
+.footnote, .footnoteref {
+  font-size: 0.8em;
+}
+
+span.footnote, span.footnoteref {
+  vertical-align: super;
+}
+
+#footnotes {
+  margin: 20px 0 20px 0;
+  padding: 7px 0 0 0;
+}
+
+#footnotes div.footnote {
+  margin: 0 0 5px 0;
+}
+
+#footnotes hr {
+  border: none;
+  border-top: 1px solid silver;
+  height: 1px;
+  text-align: left;
+  margin-left: 0;
+  width: 20%;
+  min-width: 100px;
+}
+
+div.colist td {
+  padding-right: 0.5em;
+  padding-bottom: 0.3em;
+  vertical-align: top;
+}
+div.colist td img {
+  margin-top: 0.3em;
+}
+
+@media print {
+  #footer-badges { display: none; }
+}
+
+#toc {
+  margin-bottom: 2.5em;
+}
+
+#toctitle {
+  color: #527bbd;
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-top: 1.0em;
+  margin-bottom: 0.1em;
+}
+
+div.toclevel0, div.toclevel1, div.toclevel2, div.toclevel3, div.toclevel4 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+div.toclevel2 {
+  margin-left: 2em;
+  font-size: 0.9em;
+}
+div.toclevel3 {
+  margin-left: 4em;
+  font-size: 0.9em;
+}
+div.toclevel4 {
+  margin-left: 6em;
+  font-size: 0.9em;
+}
+
+span.aqua { color: aqua; }
+span.black { color: black; }
+span.blue { color: blue; }
+span.fuchsia { color: fuchsia; }
+span.gray { color: gray; }
+span.green { color: green; }
+span.lime { color: lime; }
+span.maroon { color: maroon; }
+span.navy { color: navy; }
+span.olive { color: olive; }
+span.purple { color: purple; }
+span.red { color: red; }
+span.silver { color: silver; }
+span.teal { color: teal; }
+span.white { color: white; }
+span.yellow { color: yellow; }
+
+span.aqua-background { background: aqua; }
+span.black-background { background: black; }
+span.blue-background { background: blue; }
+span.fuchsia-background { background: fuchsia; }
+span.gray-background { background: gray; }
+span.green-background { background: green; }
+span.lime-background { background: lime; }
+span.maroon-background { background: maroon; }
+span.navy-background { background: navy; }
+span.olive-background { background: olive; }
+span.purple-background { background: purple; }
+span.red-background { background: red; }
+span.silver-background { background: silver; }
+span.teal-background { background: teal; }
+span.white-background { background: white; }
+span.yellow-background { background: yellow; }
+
+span.big { font-size: 2em; }
+span.small { font-size: 0.6em; }
+
+span.underline { text-decoration: underline; }
+span.overline { text-decoration: overline; }
+span.line-through { text-decoration: line-through; }
+
+div.unbreakable { page-break-inside: avoid; }
+
+
+/*
+ * xhtml11 specific
+ *
+ * */
+
+div.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+div.tableblock > table {
+  border: 3px solid #527bbd;
+}
+thead, p.table.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.table {
+  margin-top: 0;
+}
+/* Because the table frame attribute is overriden by CSS in most browsers. */
+div.tableblock > table[frame="void"] {
+  border-style: none;
+}
+div.tableblock > table[frame="hsides"] {
+  border-left-style: none;
+  border-right-style: none;
+}
+div.tableblock > table[frame="vsides"] {
+  border-top-style: none;
+  border-bottom-style: none;
+}
+
+
+/*
+ * html5 specific
+ *
+ * */
+
+table.tableblock {
+  margin-top: 1.0em;
+  margin-bottom: 1.5em;
+}
+thead, p.tableblock.header {
+  font-weight: bold;
+  color: #527bbd;
+}
+p.tableblock {
+  margin-top: 0;
+}
+table.tableblock {
+  border-width: 3px;
+  border-spacing: 0px;
+  border-style: solid;
+  border-color: #527bbd;
+  border-collapse: collapse;
+}
+th.tableblock, td.tableblock {
+  border-width: 1px;
+  padding: 4px;
+  border-style: solid;
+  border-color: #527bbd;
+}
+
+table.tableblock.frame-topbot {
+  border-left-style: hidden;
+  border-right-style: hidden;
+}
+table.tableblock.frame-sides {
+  border-top-style: hidden;
+  border-bottom-style: hidden;
+}
+table.tableblock.frame-none {
+  border-style: hidden;
+}
+
+th.tableblock.halign-left, td.tableblock.halign-left {
+  text-align: left;
+}
+th.tableblock.halign-center, td.tableblock.halign-center {
+  text-align: center;
+}
+th.tableblock.halign-right, td.tableblock.halign-right {
+  text-align: right;
+}
+
+th.tableblock.valign-top, td.tableblock.valign-top {
+  vertical-align: top;
+}
+th.tableblock.valign-middle, td.tableblock.valign-middle {
+  vertical-align: middle;
+}
+th.tableblock.valign-bottom, td.tableblock.valign-bottom {
+  vertical-align: bottom;
+}
+
+
+/*
+ * manpage specific
+ *
+ * */
+
+body.manpage h1 {
+  padding-top: 0.5em;
+  padding-bottom: 0.5em;
+  border-top: 2px solid silver;
+  border-bottom: 2px solid silver;
+}
+body.manpage h2 {
+  border-style: none;
+}
+body.manpage div.sectionbody {
+  margin-left: 3em;
+}
+
+@media print {
+  body.manpage div#toc { display: none; }
+}
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #f8f8f8; }
+.highlight .c { color: #408080; font-style: italic } /* Comment */
+.highlight .err { border: 1px solid #FF0000 } /* Error */
+.highlight .k { color: #008000; font-weight: bold } /* Keyword */
+.highlight .o { color: #666666 } /* Operator */
+.highlight .cm { color: #408080; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #BC7A00 } /* Comment.Preproc */
+.highlight .c1 { color: #408080; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #408080; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #808080 } /* Generic.Output */
+.highlight .gp { color: #000080; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0040D0 } /* Generic.Traceback */
+.highlight .kc { color: #008000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #008000 } /* Keyword.Pseudo */
+.highlight .kr { color: #008000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #B00040 } /* Keyword.Type */
+.highlight .m { color: #666666 } /* Literal.Number */
+.highlight .s { color: #BA2121 } /* Literal.String */
+.highlight .na { color: #7D9029 } /* Name.Attribute */
+.highlight .nb { color: #008000 } /* Name.Builtin */
+.highlight .nc { color: #0000FF; font-weight: bold } /* Name.Class */
+.highlight .no { color: #880000 } /* Name.Constant */
+.highlight .nd { color: #AA22FF } /* Name.Decorator */
+.highlight .ni { color: #999999; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #D2413A; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0000FF } /* Name.Function */
+.highlight .nl { color: #A0A000 } /* Name.Label */
+.highlight .nn { color: #0000FF; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #008000; font-weight: bold } /* Name.Tag */
+.highlight .nv { color: #19177C } /* Name.Variable */
+.highlight .ow { color: #AA22FF; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mf { color: #666666 } /* Literal.Number.Float */
+.highlight .mh { color: #666666 } /* Literal.Number.Hex */
+.highlight .mi { color: #666666 } /* Literal.Number.Integer */
+.highlight .mo { color: #666666 } /* Literal.Number.Oct */
+.highlight .sb { color: #BA2121 } /* Literal.String.Backtick */
+.highlight .sc { color: #BA2121 } /* Literal.String.Char */
+.highlight .sd { color: #BA2121; font-style: italic } /* Literal.String.Doc */
+.highlight .s2 { color: #BA2121 } /* Literal.String.Double */
+.highlight .se { color: #BB6622; font-weight: bold } /* Literal.String.Escape */
+.highlight .sh { color: #BA2121 } /* Literal.String.Heredoc */
+.highlight .si { color: #BB6688; font-weight: bold } /* Literal.String.Interpol */
+.highlight .sx { color: #008000 } /* Literal.String.Other */
+.highlight .sr { color: #BB6688 } /* Literal.String.Regex */
+.highlight .s1 { color: #BA2121 } /* Literal.String.Single */
+.highlight .ss { color: #19177C } /* Literal.String.Symbol */
+.highlight .bp { color: #008000 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #19177C } /* Name.Variable.Class */
+.highlight .vg { color: #19177C } /* Name.Variable.Global */
+.highlight .vi { color: #19177C } /* Name.Variable.Instance */
+.highlight .il { color: #666666 } /* Literal.Number.Integer.Long */
+
+
+</style>
+<script type="text/javascript">
+/*<![CDATA[*/
+var asciidoc = {  // Namespace.
+
+/////////////////////////////////////////////////////////////////////
+// Table Of Contents generator
+/////////////////////////////////////////////////////////////////////
+
+/* Author: Mihai Bazon, September 2002
+ * http://students.infoiasi.ro/~mishoo
+ *
+ * Table Of Content generator
+ * Version: 0.4
+ *
+ * Feel free to use this script under the terms of the GNU General Public
+ * License, as long as you do not remove or alter this notice.
+ */
+
+ /* modified by Troy D. Hanson, September 2006. License: GPL */
+ /* modified by Stuart Rackham, 2006, 2009. License: GPL */
+
+// toclevels = 1..4.
+toc: function (toclevels) {
+
+  function getText(el) {
+    var text = "";
+    for (var i = el.firstChild; i != null; i = i.nextSibling) {
+      if (i.nodeType == 3 /* Node.TEXT_NODE */) // IE doesn't speak constants.
+        text += i.data;
+      else if (i.firstChild != null)
+        text += getText(i);
+    }
+    return text;
+  }
+
+  function TocEntry(el, text, toclevel) {
+    this.element = el;
+    this.text = text;
+    this.toclevel = toclevel;
+  }
+
+  function tocEntries(el, toclevels) {
+    var result = new Array;
+    var re = new RegExp('[hH]([1-'+(toclevels+1)+'])');
+    // Function that scans the DOM tree for header elements (the DOM2
+    // nodeIterator API would be a better technique but not supported by all
+    // browsers).
+    var iterate = function (el) {
+      for (var i = el.firstChild; i != null; i = i.nextSibling) {
+        if (i.nodeType == 1 /* Node.ELEMENT_NODE */) {
+          var mo = re.exec(i.tagName);
+          if (mo && (i.getAttribute("class") || i.getAttribute("className")) != "float") {
+            result[result.length] = new TocEntry(i, getText(i), mo[1]-1);
+          }
+          iterate(i);
+        }
+      }
+    }
+    iterate(el);
+    return result;
+  }
+
+  var toc = document.getElementById("toc");
+  if (!toc) {
+    return;
+  }
+
+  // Delete existing TOC entries in case we're reloading the TOC.
+  var tocEntriesToRemove = [];
+  var i;
+  for (i = 0; i < toc.childNodes.length; i++) {
+    var entry = toc.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div'
+     && entry.getAttribute("class")
+     && entry.getAttribute("class").match(/^toclevel/))
+      tocEntriesToRemove.push(entry);
+  }
+  for (i = 0; i < tocEntriesToRemove.length; i++) {
+    toc.removeChild(tocEntriesToRemove[i]);
+  }
+
+  // Rebuild TOC entries.
+  var entries = tocEntries(document.getElementById("content"), toclevels);
+  for (var i = 0; i < entries.length; ++i) {
+    var entry = entries[i];
+    if (entry.element.id == "")
+      entry.element.id = "_toc_" + i;
+    var a = document.createElement("a");
+    a.href = "#" + entry.element.id;
+    a.appendChild(document.createTextNode(entry.text));
+    var div = document.createElement("div");
+    div.appendChild(a);
+    div.className = "toclevel" + entry.toclevel;
+    toc.appendChild(div);
+  }
+  if (entries.length == 0)
+    toc.parentNode.removeChild(toc);
+},
+
+
+/////////////////////////////////////////////////////////////////////
+// Footnotes generator
+/////////////////////////////////////////////////////////////////////
+
+/* Based on footnote generation code from:
+ * http://www.brandspankingnew.net/archive/2005/07/format_footnote.html
+ */
+
+footnotes: function () {
+  // Delete existing footnote entries in case we're reloading the footnodes.
+  var i;
+  var noteholder = document.getElementById("footnotes");
+  if (!noteholder) {
+    return;
+  }
+  var entriesToRemove = [];
+  for (i = 0; i < noteholder.childNodes.length; i++) {
+    var entry = noteholder.childNodes[i];
+    if (entry.nodeName.toLowerCase() == 'div' && entry.getAttribute("class") == "footnote")
+      entriesToRemove.push(entry);
+  }
+  for (i = 0; i < entriesToRemove.length; i++) {
+    noteholder.removeChild(entriesToRemove[i]);
+  }
+
+  // Rebuild footnote entries.
+  var cont = document.getElementById("content");
+  var spans = cont.getElementsByTagName("span");
+  var refs = {};
+  var n = 0;
+  for (i=0; i<spans.length; i++) {
+    if (spans[i].className == "footnote") {
+      n++;
+      var note = spans[i].getAttribute("data-note");
+      if (!note) {
+        // Use [\s\S] in place of . so multi-line matches work.
+        // Because JavaScript has no s (dotall) regex flag.
+        note = spans[i].innerHTML.match(/\s*\[([\s\S]*)]\s*/)[1];
+        spans[i].innerHTML =
+          "[<a id='_footnoteref_" + n + "' href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+        spans[i].setAttribute("data-note", note);
+      }
+      noteholder.innerHTML +=
+        "<div class='footnote' id='_footnote_" + n + "'>" +
+        "<a href='#_footnoteref_" + n + "' title='Return to text'>" +
+        n + "</a>. " + note + "</div>";
+      var id =spans[i].getAttribute("id");
+      if (id != null) refs["#"+id] = n;
+    }
+  }
+  if (n == 0)
+    noteholder.parentNode.removeChild(noteholder);
+  else {
+    // Process footnoterefs.
+    for (i=0; i<spans.length; i++) {
+      if (spans[i].className == "footnoteref") {
+        var href = spans[i].getElementsByTagName("a")[0].getAttribute("href");
+        href = href.match(/#.*/)[0];  // Because IE return full URL.
+        n = refs[href];
+        spans[i].innerHTML =
+          "[<a href='#_footnote_" + n +
+          "' title='View footnote' class='footnote'>" + n + "</a>]";
+      }
+    }
+  }
+},
+
+install: function(toclevels) {
+  var timerId;
+
+  function reinstall() {
+    asciidoc.footnotes();
+    if (toclevels) {
+      asciidoc.toc(toclevels);
+    }
+  }
+
+  function reinstallAndRemoveTimer() {
+    clearInterval(timerId);
+    reinstall();
+  }
+
+  timerId = setInterval(reinstall, 500);
+  if (document.addEventListener)
+    document.addEventListener("DOMContentLoaded", reinstallAndRemoveTimer, false);
+  else
+    window.onload = reinstallAndRemoveTimer;
+}
+
+}
+asciidoc.install();
+/*]]>*/
+</script>
+</head>
+<body class="manpage">
+<div id="header">
+<h1>
+packman-config-file(5) Manual Page
+</h1>
+<h2>NAME</h2>
+<div class="sectionbody">
+<p>config file -
+   Use this file to customize packman
+</p>
+</div>
+</div>
+<div id="content">
+<div class="sect1">
+<h2 id="_synopsis">SYNOPSIS</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>packman can be configured via local configuration files, <span class="monospaced">config.packman.xml</span>. This allows
+customization of packman for a particular project and also for your personal needs.</p></div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_description">DESCRIPTION</h2>
+<div class="sectionbody">
+<div class="paragraph"><p>For packman level configuration a <span class="monospaced">config.packman.xml</span> file must be placed in the same folder as where you have placed
+your packman command. The packman command tar
+balls that are available from the <a href="https://gitlab-master.nvidia.com/hfannar/packman/tags">packman repo</a> already have
+a default version included.</p></div>
+<div class="paragraph"><p>For user level configuration a <span class="monospaced">config.packman.xml</span> file must be placed in the current user&#8217;s home directory.</p></div>
+<div class="paragraph"><p>A config file is a text file following the XML document specification. Here is an example:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;config</span> <span class="na">remotes=</span><span class="s">&quot;gtl&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;s3&quot;</span> <span class="na">type=</span><span class="s">&quot;s3&quot;</span> <span class="na">packageLocation=</span><span class="s">&quot;packman&quot;</span><span class="nt">&gt;</span>
+     <span class="nt">&lt;credentials</span> <span class="na">id=</span><span class="s">&quot;AKIAJHPSPBMWMTZS6TJA&quot;</span> <span class="na">key=</span><span class="s">&quot;vK3d0lHiQjEW9krFfvKA4OLpuHGxi2L4/Q4r4IuT&quot;</span>
+            <span class="na">errorUrl=</span><span class="s">&quot;https://gitlab-master.nvidia.com/hfannar/packman/wikis/credentials/failure-using-s3-packman-read-access&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/remote&gt;</span>
+   <span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;gtl&quot;</span> <span class="na">type=</span><span class="s">&quot;gtl&quot;</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;credentials</span> <span class="na">id=</span><span class="s">&quot;account-name&quot;</span> <span class="na">key=</span><span class="s">&quot;key-to-the-castle&quot;</span><span class="nt">/&gt;</span>
+   <span class="nt">&lt;/remote&gt;</span>
+<span class="nt">&lt;/config&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Please read the sections below for details on each element.</p></div>
+<div class="sect2">
+<h3 id="_config">config</h3>
+<div class="paragraph"><p>A valid document must contain one config element at the root. There is no toolsVersion attribute because any changes we
+make to config file spec are both forwards and backwards compatible. An optional <span class="monospaced">remotes</span> attribute can be specified
+and contains an ordered list of remote names that should be used when fetching packages. The same rule applies here
+as with project files, any remotes referenced in the <span class="monospaced">remotes</span> attribute need to be defined within the same XML doc.</p></div>
+</div>
+<div class="sect2">
+<h3 id="_remote">remote</h3>
+<div class="paragraph"><p>The XML document can contain zero or more remote elements. This element is used to configure a remote server
+for packages. This
+element requires two attributes to be set: <span class="monospaced">name</span> and <span class="monospaced">type</span>. The name is used to reference the remote through the
+<span class="monospaced">remotes</span> attribute that is available for use in the project/config root elements but also available on the package
+element in project files. This name can also be
+used on the command line with the <span class="monospaced">--remote</span> option (see for instance <a href="publish.html">publish</a>). The <span class="monospaced">type</span> attribute
+currently supports the following values:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+gtl
+</p>
+</li>
+<li>
+<p>
+s3
+</p>
+</li>
+<li>
+<p>
+http
+</p>
+</li>
+<li>
+<p>
+https
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>Some remotes require the attribute <span class="monospaced">packageLocation</span> to be set as well. The value for this attribute depends on
+the type of service being configured. For s3 remotes the <span class="monospaced">packageLocation</span> is simply the name of the S3 bucket. For
+http(s) remotes the <span class="monospaced">packageLocation</span> is a URL, usually employing some variable substitution. For example this could be
+used to utilize GitHub as a package server:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;github&quot;</span> <span class="na">type=</span><span class="s">&quot;https&quot;</span>
+  <span class="na">packageLocation=</span><span class="s">&quot;github/NVIDIAGameWorks/${name}/releases/download/${version}/${name}-${version}.zip&quot;</span> <span class="nt">/&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Notice how the values of the attributes <span class="monospaced">name</span> and <span class="monospaced">version</span> from the package element (see <a href="project-file.html">project file</a>)
+can be substituted
+into the URL. If your http(s) remote contains some packages in 7z containers and other packages in zip containers then
+omit the file extension and packman will search for both.</p></div>
+<div class="paragraph"><p>You can also get quite crafty with URL construction and attribute substitution. For instance, this is a way to configure a
+GitLab host, with repos under the group carbon/nvtools as a remote server:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;gitlab-nvtools&quot;</span> <span class="na">type=</span><span class="s">&quot;https&quot;</span>
+  <span class="na">packageLocation=</span><span class="s">&quot;gitlab-master.nvidia.com/api/v4/projects/carbon%2Fnvtools%2F${name}/repository/archive.zip?sha=${version}&quot;</span> <span class="nt">/&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>The package <span class="monospaced">name</span> in this context is the repo name and the <span class="monospaced">version</span> is the commit hash:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;package</span> <span class="na">name=</span><span class="s">&quot;nvfilecopy&quot;</span> <span class="na">version=</span><span class="s">&quot;73a13bd22a433cb61c8619132854ee612e45fd72&quot;</span><span class="nt">/&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>This will deliver the source from the repo which is useful for languages that can execute source directly, like for instance Python.</p></div>
+<div class="paragraph"><p>For improved performance when using S3 buckets it&#8217;s common to create an AWS CloudFront distribution in front of the
+bucket. This can all be configured using the AWS console. Once that is done the upload and download are asymmetric.
+For example, the packages-for-cloudfront bucket has a matching CloudFront distribution and the download is performed via http/https
+like this:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;cloudfront&quot;</span> <span class="na">type=</span><span class="s">&quot;https&quot;</span>
+    <span class="na">packageLocation=</span><span class="s">&quot;d4i3qtqj3r0z5.cloudfront.net/${name}@${version}&quot;</span> <span class="nt">/&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>Notice that the upload will be performed via a remote of type <span class="monospaced">s3</span> with credentials that allow writing to the bucket.</p></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">CloudFront can only serve packages that are public on S3. To streamline this process all packages uploaded to
+packages-for-cloudfront bucket on S3 are automatically public.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_credentials">credentials</h3>
+<div class="paragraph"><p>Some remotes require authentication. A remote can therefore contain a credentials element. This element is used to
+configure access credentials for that specific remote server. Here is how we configure the packman s3 bucket for
+read access as a remote:</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;remote</span> <span class="na">name=</span><span class="s">&quot;s3&quot;</span> <span class="na">type=</span><span class="s">&quot;s3&quot;</span> <span class="na">packageLocation=</span><span class="s">&quot;packman&quot;</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;credentials</span> <span class="na">id=</span><span class="s">&quot;AKIAJHPSPBMWMTZS6TJA&quot;</span> <span class="na">key=</span><span class="s">&quot;vK3d0lHiQjEW9krFfvKA4OLpuHGxi2L4/Q4r4IuT&quot;</span>
+      <span class="na">errorUrl=</span><span class="s">&quot;https://gitlab-master.nvidia.com/hfannar/packman/wikis/credentials/failure-using-s3-packman-read-access&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;/remote&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>The <span class="monospaced">id</span> and <span class="monospaced">key</span> attributes are of course required and they need to provide read access to the remote server&#8217;s
+<span class="monospaced">packageLocation</span>. When configuring remotes for upload the credentials must also allow writing - but that type of
+configuration would normally <strong>not</strong> be found in a project XML file. That type of configuration is normally stored in
+separate config files (see <a href="config-file.html">config file</a>). The optional <span class="monospaced">errorUrl</span> attribute is used to specify a
+web page that packman can redirect to if the access credentials are not accepted by the remote server. This is helpful
+to aid users when:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+credentials have been changed (key rotation) - the latest credentials are published on an internally accessible
+web server and the address can be specified in <span class="monospaced">errorUrl</span>. Note that key rotation is typically only performed for
+keys that provide write access.
+</p>
+</li>
+<li>
+<p>
+credentials are not sufficient - the <span class="monospaced">errorUrl</span> could point to an internally accessible web page that contains other
+credentials that are more permissive.
+</p>
+</li>
+</ol></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">We typically define remotes with full-access credentials in the user&#8217;s <a href="config-file.html">config file</a>.
+These can then be referred to when using push and publish command with <span class="monospaced">--remote=user:&lt;remote-name&gt;</span> option. By
+doing this the write credentials for a remote are not shared with other users. It is however possible that on an
+internal only project the full-access credentials would be put into a packman level config file or even a project
+file. There is nothing in the design that prohibits this. Ultimately the choice is yours in how you want to configure
+the remotes and what level of security is required for the credentials in your project.</td>
+</tr></table>
+</div>
+<div class="paragraph"><p>Further documentation on the full-access credentials for NVIDIA hosted buckets on S3 can be found on the internal
+packman wiki:</p></div>
+<div class="olist arabic"><ol class="arabic">
+<li>
+<p>
+<a href="https://gitlab-master.nvidia.com/hfannar/packman/wikis/how-to-configure-s3-full-access">S3 packman bucket</a>,
+</p>
+</li>
+<li>
+<p>
+<a href="https://gitlab-master.nvidia.com/hfannar/packman/wikis/how-to-configure-s3-cloudfront-full-access">S3 cloudfront bucket</a>.
+</p>
+</li>
+</ol></div>
+<div class="paragraph"><p>Its possible to store the <span class="monospaced">id</span> and <span class="monospaced">key</span> in system environment variables for automated systems where its not advisable
+to store them in a configuration file located in source control.</p></div>
+<div class="paragraph"><p>S3 credentials:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+PM_S3_ID
+</p>
+</li>
+<li>
+<p>
+PM_S3_KEY
+</p>
+</li>
+</ul></div>
+<div class="paragraph"><p>GTL credentials:</p></div>
+<div class="ulist"><ul>
+<li>
+<p>
+PM_GTL_ID
+</p>
+</li>
+<li>
+<p>
+PM_GTL_KEY
+</p>
+</li>
+</ul></div>
+<div class="admonitionblock">
+<table><tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">Do not provide a &lt;credentials&gt; element for the remote in a <a href="config-file.html">config file</a> if you want to pick up the credentials from environment variables.</td>
+</tr></table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_cache">cache</h3>
+<div class="paragraph"><p>A cache element can be specified under the config element. It currently only supports one optional attribute
+<span class="monospaced">removePreviousPackageOnLabelUpdate</span> which by default is set to <span class="monospaced">false</span> but can be set to <span class="monospaced">true</span>. That is, including this
+within config</p></div>
+<div class="listingblock">
+<div class="content"><div class="highlight"><pre><span></span><span class="nt">&lt;cache</span> <span class="na">removePreviousPackageOnLabelUpdate=</span><span class="s">&quot;true&quot;</span> <span class="nt">/&gt;</span>
+</pre></div></div></div>
+<div class="paragraph"><p>will enable the removal of previously referenced package when a label is updated and points to a new package. This is
+useful to limit cache size when labels change frequently but does run the risk of jeopardizing any concurrently
+running builds that would need that package.</p></div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_see_also">See also</h2>
+<div class="sectionbody">
+<div class="paragraph"><p><a href="project-file.html">project file</a>(5),
+<a href="https://gitlab-master.nvidia.com/hfannar/packman/wikis/how-to-configure-s3-full-access">packman S3 credentials</a></p></div>
+</div>
+</div>
+</div>
+<div id="footnotes"><hr></div>
+<div id="footer">
+<div id="footer-text">
+Last updated 2019-10-14 21:48:04 Pacific Daylight Time
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,7 @@
+<project toolsVersion="5.0" remotes="bootstrap">
+	<remote name="bootstrap" type="https" packageLocation="packman-bootstrap.s3.amazonaws.com/${name}@${version}.zip" />
+	<!-- This package contains binaries for all packman supported platforms -->
+	<dependency name="7za">
+		<package name="7za" version="16.02.4" remotes="bootstrap" />
+	</dependency>
+</project>

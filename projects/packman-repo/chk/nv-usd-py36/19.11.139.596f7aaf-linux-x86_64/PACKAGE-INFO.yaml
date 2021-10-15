@@ -1,0 +1,6 @@
+Package : nv-usd-py36 
+Description : Pixar's Universal Scene Description library (http://openusd.org) with Python 3.6 support
+Maintainers : NVIDIA
+SWIPAT NvBug : http://nvbugs/2515781
+Repository : https://gitlab-master.nvidia.com/omniverse/usd-build
+
